@@ -16,7 +16,7 @@ float voltage3;
 int value4 = 0;
 float voltage4;
 float R1 = 39000.0;
-float R2 = 8200.0;
+float R2 = 8000.0;
 
 // Thermister Variables
 

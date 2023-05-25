@@ -17,6 +17,7 @@ void setup() {
   espSerial.begin(115200);
   WiFi.mode(WIFI_STA); 
   ThingSpeak.begin(client);  // Initialize ThingSpeak
+  pinMode(D0,OUTPUT);
 }
 
 void loop() {
@@ -40,16 +41,11 @@ String V2=data.substring(7,11);
 String V3=data.substring(14,18);
 String TX=data.substring(21,26);
 String C=data.substring(29,34);
-Serial.println(V1);
-Serial.println(V2);
-Serial.println(V3);
-Serial.println(TX);
-Serial.println(C);
-//int V_1= V1.toInt();
-//int V_2= V2.toInt();
-//int V_3= V3.toInt();
-//int T_X= TX.toInt();
-//int Cur= C.toInt();
+//Serial.println(V1);
+//Serial.println(V2);
+//Serial.println(V3);
+//Serial.println(TX);
+//Serial.println(C);
 
   // set the fields with the values
   ThingSpeak.setField(1, V1);
@@ -71,5 +67,16 @@ Serial.println(C);
   else{
     Serial.println("Problem updating channel. HTTP error code " + String(x));
   }
-   
+
+ // int V_1= V1.toInt();
+ // int V_2= V2.toInt();
+  //int V_3= V3.toInt();
+  int T_X= TX.toInt();
+  //int Cur= C.toInt();
+  if(40<T_X){
+    digitalWrite(D0,HIGH);
+    }
+    else{
+      digitalWrite(D0,LOW);
+      }
 }
