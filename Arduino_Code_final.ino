@@ -41,7 +41,7 @@ double currentValue = 0;
 void setup(){
 //Serial Communication
 espSerial.begin(115200);
-//Serial.begin(9600);
+Serial.begin(9600);
 pinMode(13,OUTPUT);
  T0 = 25 + 273.15;//Temperature T0 from datasheet, conversion from Celsius to kelvin
 lcd.begin(16,2);
@@ -130,13 +130,14 @@ VRT = analogRead(A3);              //Acquisition analog value of VRT
   //ACS712 reading start 
   
    int adc = analogRead(A4);
+   Serial.println(adc);
    float voltage = (adc*5)/1023.0;
-   float current =(2.16 - voltage)/0.100;
-   if(current < 0.20){
+   float current =( voltage - 2.16)/0.100;
+   if(current < 0.15){
     current=0;
     }
-  //Serial.print("CURRENT-");
-  //Serial.println(current);
+  Serial.print("CURRENT-");
+  Serial.println(current);
   lcd.setCursor(0,1);
   lcd.print("Current-");
   lcd.setCursor(8,1);
